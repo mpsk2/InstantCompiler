@@ -18,3 +18,9 @@ cabal.sandbox.config
 .stack-work/
 cabal.project.local
 .HTF/
+
+# downloaded bnfc
+bnfc
+
+# generated grammar files
+src/instant

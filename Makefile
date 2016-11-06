@@ -1,14 +1,23 @@
+BNFC=bnfc
 BNFC_URL_PREFIX=http://bnfc.digitalgrammars.com/download/
 BNFC_URL_INFIX=BNFC-2.7.1-linux-x86_64
 BNFC_URL_SUFFIX=.tar.gz
+GRAMMAR_NAME=instant
+GRAMMAR_FILE=src/$(GRAMMAR_NAME).cf
+GRAMMAR_DIR=src/$(GRAMMAR_NAME)
 
-all: bnfc
+all: $(GRAMMAR_DIR)
 
-bnfc:
+$(GRAMMAR_DIR): bnfc $(GRAMMAR_FILE)
+	./$(BNFC) $(GRAMMAR_FILE) -d
+	mv $(GRAMMAR_NAME) $(GRAMMAR_DIR)
+	
+
+$(BNFC):
 	wget $(BNFC_URL_PREFIX)$(BNFC_URL_INFIX)$(BNFC_URL_SUFFIX)
 	tar -xf $(BNFC_URL_INFIX)$(BNFC_URL_SUFFIX)
-	mv $(BNFC_URL_INFIX)/bin/bnfc .
+	mv $(BNFC_URL_INFIX)/bin/bnfc $(BNFC)
 	rm -rf $(BNFC_URL_INFIX)$(BNFC_URL_SUFFIX) $(BNFC_URL_INFIX)
 	
 clean:
-	rm bnfc
+	rm -rf $(BNFC) $(GRAMMAR_DIR)
