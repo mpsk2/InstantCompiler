@@ -23,4 +23,4 @@ cabal.project.local
 bnfc
 
 # generated grammar files
-src/instant
+src/Instant
