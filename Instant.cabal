@@ -18,8 +18,8 @@ executable insc_jvm
   hs-source-dirs:      ToJVM
 
 library
-  exposed-modules:     Cli Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs
-  -- other-modules:       
-  build-depends:       base==4.6.*, array
+  exposed-modules:     Cli JVMWalker
+  other-modules:       Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs MErrors
+  build-depends:       base==4.6.*, array, mtl, transformers
   hs-source-dirs:      src
   build-tools:         alex, happy

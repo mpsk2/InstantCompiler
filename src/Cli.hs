@@ -1,34 +1,29 @@
 module Cli where
 
-import Control.Monad
-import Data.Char
-import Data.List
 import System.Console.GetOpt
 import System.Environment
 import System.Exit
+import Control.Monad
 import System.IO
-import Text.Printf
+import Data.List
+import Data.Char
 
-tac :: String -> String
-tac = unlines . reverse . lines
+data Options = Options { outputFile :: String 
+		       } deriving (Show)
 
-usage :: IO ()
-usage = putStrLn "TODO" >> exitFailure
+startOptions :: Options
+startOptions = Options { outputFile = "a.out"
+		       }
 
-data Flag
-	= Output -- -o/--output
-	| Help   -- -h/--help
-	deriving (Eq, Ord, Enum, Show, Bounded)
-
-flags = 
-	[Option ['o'] ["output"] (NoArg Output) "Output file"
-	,Option ['h'] ["help"] (NoArg Help) "Print help message"
-	]
-
-parse argv = case getOpt Permute flags argv of
-		(args,fs,[]) -> do
-			hPutStrLn stderr (usageInfo header flags)
-			exitWith ExitSuccess
-		(_,_,errs) -> do
-			exitWith (ExitFailure 1)
-        where header = "Usage: cat [-benstuv] [file ...]"
+options :: [ OptDescr (Options -> IO Options) ]
+options =
+  [ Option "h" ["help"]
+      (NoArg
+	(\_ -> do
+	  prg <- getProgName
+	  hPutStrLn stderr (usageInfo prg options)
+	  exitWith ExitSuccess))
+      "Show help"
+  ]
+  
+getOptions args = getOpt RequireOrder options args
