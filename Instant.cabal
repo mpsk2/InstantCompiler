@@ -12,9 +12,14 @@ category:            Language
 build-type:          Simple
 cabal-version:       >=1.8
 
+executable insc_jvm
+  build-depends:       Instant, base==4.6.*
+  main-is:             Main.hs
+  hs-source-dirs:      ToJVM
+
 library
-  exposed-modules:     Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs
+  exposed-modules:     Cli Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs
   -- other-modules:       
-  build-depends:       base ==4.6.*, array
+  build-depends:       base==4.6.*, array
   hs-source-dirs:      src
   build-tools:         alex, happy
