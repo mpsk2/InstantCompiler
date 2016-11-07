@@ -15,9 +15,7 @@ GRAMMAR_DIR=src/$(GRAMMAR_NAME)
 INSC_JVM=insc_jvm
 INSC_JVM_MAIN=ToJVM/Main.hs
 
-all: $(INSC_JVM) $(GRAMMAR_DIR)
-
-$(INSC_JVM): $(INSC_JVM_MAIN) $(GRAMMAR_DIR)
+all: $(GRAMMAR_DIR) $(INSC_JVM_MAIN)
 	$(call colorecho, "Compiling")
 	$(CABAL) configure
 	$(CABAL) build
@@ -40,6 +38,9 @@ $(BNFC):
 	mv $(BNFC_URL_INFIX)/bin/bnfc $(BNFC)
 	rm -rf $(BNFC_URL_INFIX)$(BNFC_URL_SUFFIX) $(BNFC_URL_INFIX)
 	$(call colorecho, "BNFC - downloaded")
+	
+clean_dist:
+	$(CABAL) clean
 
 clean:
 	$(CABAL) clean
