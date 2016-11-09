@@ -6,6 +6,7 @@ Table of Content
 
 1. About
 2. Authors
+3. Building
 
 About
 -----
@@ -21,4 +22,16 @@ Authors
 
 The only author is *Michał Piotr Stankiewicz*.
 
+Building
+--------
+
+You need to have installed GHC, Cabal, Make
+
+.. code-block:: sh
+
+    sudo apt-get update
+    sudo apt-get install ghc cabal-install make
+    cd /path/to/project
+    cabal install alex happy
+    make
 
