@@ -18,8 +18,9 @@ executable insc_jvm
   hs-source-dirs:      ToJVM
 
 library
-  exposed-modules:     Cli JVMWalker
+  exposed-modules:     Cli JasminConstants JasminProgram
   other-modules:       Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs MErrors
-  build-depends:       base==4.6.*, array, mtl, transformers
+  build-depends:       base==4.6.*, array, mtl, transformers, containers
   hs-source-dirs:      src
   build-tools:         alex, happy
+  ghc-options:         -fno-warn-warnings-deprecations
