@@ -20,7 +20,7 @@ executable insc_jvm
 library
   exposed-modules:     Cli JasminConstants JasminProgram
   other-modules:       Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs MErrors
-  build-depends:       base==4.6.*, array, mtl, transformers, containers
+  build-depends:       base==4.6.*, array, mtl, transformers, containers, directory
   hs-source-dirs:      src
   build-tools:         alex, happy
   ghc-options:         -fno-warn-warnings-deprecations

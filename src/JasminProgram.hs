@@ -31,13 +31,13 @@ parseProgram :: String -> String -> MyRunner ()
 parseProgram s path = let ts = myLexer s in
   case pProgram ts of
     Bad s -> do
-      liftIO $ hPrint stderr s
+      liftIO $ print s
       throwError (OtherError s)
     Ok three -> do
-      liftIO $ hPrint stderr three
+      liftIO $ print three
       program <- evalProgram three
       state <- get
-      liftIO $ hPrint stderr state
+      liftIO $ print state
       liftIO $ writeFile path $ unlines ((header "Hello") ++ (mainHeader (biggestStack state) (nextLocal state)) ++ program ++ mainFooter)
   
 evalProgram :: Program -> MyRunner [String]

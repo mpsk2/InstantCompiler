@@ -5,10 +5,14 @@ import System.Environment
 
 type Verbosity = Int
 
-main :: IO()
+main :: IO ()
 main = do
     args <- getArgs
     let (actions, nonOptions, errors) =  getOptions args
     opts <- foldl (>>=) (return startOptions) actions
     
     putStrLn $ show opts
+    putStrLn $ show nonOptions
+    putStrLn $ show errors
+    
+    validateArgs nonOptions
