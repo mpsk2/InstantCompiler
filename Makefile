@@ -10,11 +10,10 @@ GRAMMAR_NAME=Instant
 GRAMMAR_FILE=src/$(GRAMMAR_NAME).cf
 GRAMMAR_DIR=src/$(GRAMMAR_NAME)
 INSC_JVM=insc_jvm
-INSC_JVM_MAIN=ToJVM/Main.hs
 JASMIN=tools/jasmin.jar
 
 
-all:$(GRAMMAR_DIR) $(INSC_JVM_MAIN)
+all:$(GRAMMAR_DIR)
 	$(call colorecho, "Compiling")
 	$(CABAL) configure
 	$(CABAL) build

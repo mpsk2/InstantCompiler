@@ -66,7 +66,6 @@ evalStmt (SAss ident e) = do
 evalStmt (SExp e) = do
   state <- get
   (instructions, stackSize) <- evalExp e
-  liftIO $ print $ show stackSize
   put $ MyState (env state) (nextLocal state) (max (stackSize + 1) (biggestStack state)) -- TODO(mps)
   return $ printInt instructions
   
@@ -85,17 +84,20 @@ stackSum a b
   | a == b = a + 1
   | a < b = b
   | otherwise = a
+  
+orderedSum :: Integer -> Integer -> Integer
+orderedSum a b = max a (b+1)
 
 evalArithWitoutOrder :: Exp -> Exp -> Operation -> MyRunner ([String], Integer)
 evalArithWitoutOrder lhs rhs op = do
   (lhs_inst, lhs_stack) <- evalExp lhs
   (rhs_inst, rhs_stack) <- evalExp rhs
   if lhs_stack > rhs_stack
-    then return (operation lhs_inst rhs_inst op, stackSum lhs_stack rhs_stack) -- TODO - CALCULATE STACK
-    else return (operation rhs_inst lhs_inst op, stackSum lhs_stack rhs_stack) -- TODO - CALCULATE STACK
+    then return (operation lhs_inst rhs_inst op, stackSum lhs_stack rhs_stack)
+    else return (operation rhs_inst lhs_inst op, stackSum lhs_stack rhs_stack)
 
 evalArithWithOrder :: Exp -> Exp -> Operation -> MyRunner ([String], Integer)
 evalArithWithOrder lhs rhs op = do
   (lhs_inst, lhs_stack) <- evalExp lhs
   (rhs_inst, rhs_stack) <- evalExp rhs
-  return (operation lhs_inst rhs_inst op, stackSum lhs_stack rhs_stack) -- TODO - CALCULATE STACK
+  return (operation lhs_inst rhs_inst op, orderedSum lhs_stack rhs_stack)
