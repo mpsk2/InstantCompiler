@@ -4,11 +4,11 @@ import System.IO
 import Control.Monad.State
 import Control.Monad.Error
 import Control.Monad.Error.Class
-
 import qualified Data.Map as Map
 
 import JasminConstants
 import MErrors
+import Commons
 
 import Instant.Abs
 import Instant.Par 
@@ -19,16 +19,6 @@ runFile inputFile outputFile className = readFile inputFile >>= actualProgram ou
 
 actualProgram :: String -> String -> String -> IO (Either CustomError ((), MyState))
 actualProgram path className program = runMyRunner (parseProgram program className path) initMyState
-  
-data MyState = MyState {env :: Map.Map Ident Integer, nextLocal :: Integer, biggestStack :: Integer} deriving (Show)
-
-initMyState :: MyState
-initMyState = MyState Map.empty 1 0
-
-type MyRunner a = StateT MyState (ErrorT CustomError IO) a
-
-runMyRunner :: MyRunner a -> MyState -> IO (Either CustomError (a, MyState))
-runMyRunner m st = runErrorT (runStateT m st)
 
 parseProgram :: String -> String -> String -> MyRunner ()
 parseProgram s className path = let ts = myLexer s in
