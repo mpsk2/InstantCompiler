@@ -1,5 +1,7 @@
 module JasminConstants where
 
+import Commons
+
 header :: String -> [String]
 header className = [
     ".class public " ++ className
@@ -37,8 +39,6 @@ printInt instructions = [
   ] ++ instructions ++ [
   "   invokevirtual java/io/PrintStream/println(I)V"
   ]
-
-data Operation = Add | Sub | Mul | Div deriving (Show, Eq)
 
 saveToLocal :: Integer -> [String]
 saveToLocal i

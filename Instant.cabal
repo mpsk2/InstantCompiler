@@ -23,8 +23,8 @@ executable insc_llvm
   hs-source-dirs:      src/LLVM
 
 library
-  exposed-modules:     Cli JasminConstants JasminProgram MErrors LLVMConstants
-  other-modules:       Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs Commons
+  exposed-modules:     Cli JasminConstants JasminProgram MErrors LLVMProgram
+  other-modules:       Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs Commons LLVMConstants
   build-depends:       base==4.6.*, array, mtl, transformers, containers, directory, filepath
   hs-source-dirs:      src
   build-tools:         alex, happy

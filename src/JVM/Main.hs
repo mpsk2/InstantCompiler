@@ -6,8 +6,6 @@ import MErrors
 import System.Environment
 import System.Process
 
-type Verbosity = Int
-
 main :: IO ()
 main = do
     args <- getArgs

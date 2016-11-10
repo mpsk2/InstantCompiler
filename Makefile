@@ -16,6 +16,7 @@ JASMIN=tools/jasmin.jar
 
 all:
 	$(call colorecho, "Compiling")
+	$(CABAL) install process==1.4.2.0
 	$(CABAL) configure
 	$(CABAL) build
 	cp dist/build/$(INSC_JVM)/$(INSC_JVM) .
