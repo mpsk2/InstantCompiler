@@ -17,6 +17,11 @@ executable insc_jvm
   main-is:             Main.hs
   hs-source-dirs:      src/JVM
 
+executable insc_llvm
+  build-depends:       Instant, base==4.6.*, process>=1.2.0.0
+  main-is:             Main.hs
+  hs-source-dirs:      src/LLVM
+
 library
   exposed-modules:     Cli JasminConstants JasminProgram MErrors LLVMConstants
   other-modules:       Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs Commons

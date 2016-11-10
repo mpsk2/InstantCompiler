@@ -10,6 +10,7 @@ GRAMMAR_NAME=Instant
 GRAMMAR_FILE=src/$(GRAMMAR_NAME).cf
 GRAMMAR_DIR=src/$(GRAMMAR_NAME)
 INSC_JVM=insc_jvm
+INSC_LLVM=insc_llvm
 JASMIN=tools/jasmin.jar
 
 
@@ -18,6 +19,7 @@ all:$(GRAMMAR_DIR)
 	$(CABAL) configure
 	$(CABAL) build
 	cp dist/build/$(INSC_JVM)/$(INSC_JVM) .
+	cp dist/build/$(INSC_LLVM)/$(INSC_LLVM) .
 	$(call colorecho, "Compiled")
 
 $(GRAMMAR_DIR): $(BNFC) $(GRAMMAR_FILE)
