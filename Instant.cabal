@@ -18,7 +18,7 @@ executable insc_jvm
   hs-source-dirs:      src/JVM
 
 library
-  exposed-modules:     Cli JasminConstants JasminProgram MErrors
+  exposed-modules:     Cli JasminConstants JasminProgram MErrors LLVMConstants
   other-modules:       Instant.Lex, Instant.Skel, Instant.Print, Instant.ErrM, Instant.Par, Instant.Abs Commons
   build-depends:       base==4.6.*, array, mtl, transformers, containers, directory, filepath
   hs-source-dirs:      src
