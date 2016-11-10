@@ -20,9 +20,6 @@ cabal.project.local
 .HTF/
 *~
 
-# generated grammar files
-src/Instant
-
 # build
 insc_jvm
 insc_llvm
