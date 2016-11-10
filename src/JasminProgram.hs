@@ -14,8 +14,11 @@ import Instant.Abs
 import Instant.Par 
 import Instant.ErrM
 
-actualProgram :: String -> String -> IO (Either CustomError ((), MyState))
-actualProgram program path = runMyRunner (parseProgram program path) initMyState
+runFile :: String -> String -> String -> IO (Either CustomError ((), MyState))
+runFile inputFile outputFile className = readFile inputFile >>= actualProgram outputFile className 
+
+actualProgram :: String -> String -> String -> IO (Either CustomError ((), MyState))
+actualProgram path className program = runMyRunner (parseProgram program className path) initMyState
   
 data MyState = MyState {env :: Map.Map Ident Integer, nextLocal :: Integer, biggestStack :: Integer} deriving (Show)
 
@@ -27,8 +30,8 @@ type MyRunner a = StateT MyState (ErrorT CustomError IO) a
 runMyRunner :: MyRunner a -> MyState -> IO (Either CustomError (a, MyState))
 runMyRunner m st = runErrorT (runStateT m st)
 
-parseProgram :: String -> String -> MyRunner ()
-parseProgram s path = let ts = myLexer s in
+parseProgram :: String -> String -> String -> MyRunner ()
+parseProgram s className path = let ts = myLexer s in
   case pProgram ts of
     Bad s -> do
       liftIO $ print s
@@ -38,7 +41,7 @@ parseProgram s path = let ts = myLexer s in
       program <- evalProgram three
       state <- get
       liftIO $ print state
-      liftIO $ writeFile path $ unlines ((header "Hello") ++ (mainHeader (biggestStack state) (nextLocal state)) ++ program ++ mainFooter)
+      liftIO $ writeFile path $ unlines ((header className) ++ (mainHeader (biggestStack state) (nextLocal state)) ++ program ++ mainFooter)
   
 evalProgram :: Program -> MyRunner [String]
 evalProgram (Prog stmts) = evalProgram' stmts []

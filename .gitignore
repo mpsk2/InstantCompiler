@@ -20,9 +20,6 @@ cabal.project.local
 .HTF/
 *~
 
-# downloaded bnfc
-bnfc
-
 # generated grammar files
 src/Instant
 

@@ -13,11 +13,13 @@ header className = [
   , "   invokespecial java/lang/Object/<init>()V"
   , "   return"
   , ".end method"
+  , ""
   ]
 
 mainHeader :: Integer -> Integer -> [String]
 mainHeader stackLimit localsLimit = [
-    ".method public static main([Ljava/lang/String;)V"
+    "; Main method"
+  , ".method public static main([Ljava/lang/String;)V"
   , "   .limit stack " ++ (show stackLimit)
   , "   .limit locals " ++ (show localsLimit)  -- program arguments +1, but state starts counting from 1, so -1, so 0
   ]

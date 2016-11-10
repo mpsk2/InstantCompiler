@@ -4,6 +4,7 @@ import System.Console.GetOpt
 import System.Environment
 import System.Exit
 import System.Directory
+import System.FilePath.Posix
 import Control.Monad
 import System.IO
 import Data.List
@@ -52,3 +53,12 @@ validateArgs [path] = do
      then return ()
      else argsFail
 validateArgs (_:_:_) = argsFail
+
+jasminOutput :: String -> String -> String
+jasminOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".j"]
+
+classOutput :: String -> String -> String
+classOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".class"]
+
+baseName :: String -> String
+baseName fileName = takeBaseName fileName 
