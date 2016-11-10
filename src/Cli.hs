@@ -57,6 +57,12 @@ validateArgs (_:_:_) = argsFail
 jasminOutput :: String -> String -> String
 jasminOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".j"]
 
+llvmOutput :: String -> String -> String
+llvmOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".ll"]
+
+bcOutput :: String -> String -> String
+bcOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".bc"]
+
 classOutput :: String -> String -> String
 classOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".class"]
 

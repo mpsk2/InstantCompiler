@@ -15,6 +15,8 @@ main = do
     
     validateArgs nonOptions
     
-    runFile (head nonOptions) "test.ll"
+    runFile (head nonOptions) (llvmOutput (head nonOptions) (outputDirectory opts))
     
-    return ()
+    callProcess "llvm-as" [llvmOutput (head nonOptions) (outputDirectory opts), "-o", "_sub.bc"]
+    callProcess "llvm-link" ["-o", bcOutput (head nonOptions) (outputDirectory opts), "tools/runtime.bc", "_sub.bc"]
+    callProcess "rm" ["_sub.bc"]

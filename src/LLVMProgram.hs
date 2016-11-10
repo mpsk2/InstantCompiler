@@ -42,6 +42,9 @@ evalProgram (Prog stmts) = evalProgram' stmts []
       
 evalStmt :: Stmt -> MySimpleRunner [String]
 evalStmt (SExp (ExpLit i)) = return $ printConstant i
+evalStmt (SExp (ExpVar (Ident name))) = do
+  ticket <- getTicket
+  return $ printVariable name ticket
 evalStmt (SExp e) = do
   value <- evalExp e
   case value of
