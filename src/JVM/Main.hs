@@ -5,6 +5,7 @@ import JasminProgram
 import MErrors
 import System.Environment
 import System.Process
+import System.FilePath.Posix
 
 main :: IO ()
 main = do
@@ -14,6 +15,8 @@ main = do
     
     validateArgs nonOptions
     
-    runFile (head nonOptions) (jasminOutput (head nonOptions) (outputDirectory opts)) (baseName $ head nonOptions)
+    putStrLn $ jasminOutput $ head nonOptions
     
-    callProcess "java" ["-jar", "tools/jasmin.jar", (jasminOutput (head nonOptions) (outputDirectory opts)), "-d", outputDirectory opts]
+    runFile (head nonOptions) (jasminOutput $ head nonOptions) (baseName $ head nonOptions)
+    
+    callProcess "java" ["-jar", "tools/jasmin.jar", jasminOutput $ head nonOptions, "-d", takeDirectory $ head nonOptions]

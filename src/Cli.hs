@@ -54,17 +54,17 @@ validateArgs [path] = do
      else argsFail
 validateArgs (_:_:_) = argsFail
 
-jasminOutput :: String -> String -> String
-jasminOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".j"]
+jasminOutput :: String -> String
+jasminOutput fileName = (dropExtension fileName) ++ ".j"
 
-llvmOutput :: String -> String -> String
-llvmOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".ll"]
+llvmOutput :: String -> String
+llvmOutput fileName = (dropExtension fileName) ++ ".ll"
 
 bcOutput :: String -> String -> String
-bcOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".bc"]
+bcOutput fileName outputDirectory = (dropExtension fileName) ++ ".bc"
 
-classOutput :: String -> String -> String
-classOutput fileName outputDirectory = joinPath [outputDirectory, (baseName fileName) ++ ".class"]
+classOutput :: String -> String
+classOutput fileName = (dropExtension fileName) ++ ".class"
 
 baseName :: String -> String
 baseName fileName = takeBaseName fileName 

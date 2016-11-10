@@ -13,12 +13,12 @@ build-type:          Simple
 cabal-version:       >=1.8
 
 executable insc_jvm
-  build-depends:       Instant, base==4.6.*, process>=1.2.0.0
+  build-depends:       Instant, base==4.6.*, process>=1.2.0.0, filepath
   main-is:             Main.hs
   hs-source-dirs:      src/JVM
 
 executable insc_llvm
-  build-depends:       Instant, base==4.6.*, process>=1.2.0.0
+  build-depends:       Instant, base==4.6.*, process>=1.2.0.0, filepath
   main-is:             Main.hs
   hs-source-dirs:      src/LLVM
 
