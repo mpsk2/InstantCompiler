@@ -19,5 +19,5 @@ main = do
     runFile (head nonOptions) (llvmOutput $ head nonOptions)
     
     callProcess "llvm-as" [llvmOutput $ head nonOptions, "-o", "_sub.bc"]
-    callProcess "llvm-link" ["-o", bcOutput (head nonOptions) (outputDirectory opts), "tools/runtime.bc", "_sub.bc"]
+    callProcess "llvm-link" ["-o", bcOutput (head nonOptions) (outputDirectory opts), "libs/runtime.bc", "_sub.bc"]
     callProcess "rm" ["_sub.bc"]

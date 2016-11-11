@@ -19,4 +19,4 @@ main = do
     
     runFile (head nonOptions) (jasminOutput $ head nonOptions) (baseName $ head nonOptions)
     
-    callProcess "java" ["-jar", "tools/jasmin.jar", jasminOutput $ head nonOptions, "-d", takeDirectory $ head nonOptions]
+    callProcess "java" ["-jar", "libs/jasmin.jar", jasminOutput $ head nonOptions, "-d", takeDirectory $ head nonOptions]
